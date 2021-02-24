@@ -1,32 +1,27 @@
-import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import axios from 'axios'
+import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
-@Module({ 
-  namespaced: true, name: 'movie' 
-})
-
+@Module({ namespaced: true })
 class Movie extends VuexModule {
-  public movies: Array<object> = []
+  public title: string = '';
+  public movies: Array<number> = []
 
   @Mutation
-  public setMovies(movies: Array<object>): void {
-    this.movies = movies
+  public setTitle(newTitle: string): void {
+    this.title = newTitle;
+  }
+
+  public setMovies(movies: Array<number>): void {
+    this.movies = movies;
   }
 
   @Action
   public updateMovies(): void {
-    axios
-      .get('https://api.themoviedb.org/3/movie/550?api_key=331809dfe739c8b14228e31bcaf71859')
-      .then(response => {
-        // this.movies = response;
-        console.log(response);
-        this.context.commit('setMovies', response)
-      })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => alert('fdf'));
+    const list: Array<number> = [1,2,3,4,5,6,7,8,9,10,11]
+    this.context.commit('setMovies', list);
+  }
+
+  get titleUpperCase(): string{
+    return this.title.toUpperCase();
   }
 }
-
-export default Movie
+export default Movie;

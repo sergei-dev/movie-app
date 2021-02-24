@@ -1,13 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Movie from '@/store/modules/movie'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+import Movie from "./modules/movie";
 
-const store = new Vuex.Store({
+Vue.use(Vuex);
+
+export default new Vuex.Store({
   modules: {
     Movie
   }
-})
-
-export default store
+});

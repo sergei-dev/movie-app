@@ -1,29 +1,31 @@
 <template>
   <div class="list">
+    <!-- {{ updateTitle('hello shit') }} -->
+    {{ title }}
     <!-- <MovieItem v-for="movie in movies" :key="movie" /> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import MovieItem from "./MovieItem.vue";
-import { namespace } from 'vuex-class'
-const movie = namespace('movie')
+import { namespace } from "vuex-class";
+const Movie = namespace("Movie");
 
-@Component({
-  components: {
-    MovieItem,
-  }
-})
-export default class MovieList extends Vue {
-  @movie.State
-  public movies: Array<object>|undefined
+@Component
+export default class MoviesList extends Vue {
+  @Movie.State
+  public title!: string;
+  public movies!: Array<number>;
 
-  @movie.Action
-  public updateMovies!: () => void
+  @Movie.Getter
+  public titleUpperCase!: string;
 
-  mounted() {
-    console.log('mount')
+  @Movie.Action
+  public updateMovies!: () => void;
+
+   mounted() {
+    console.log(this.movies);
+    this.updateMovies();
   }
 }
 </script>
